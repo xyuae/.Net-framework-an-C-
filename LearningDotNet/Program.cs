@@ -10,8 +10,19 @@ using System.Threading.Tasks;
 
 namespace LearningDotNet
 {
+    class Player
+    {
+        public bool IsAlive
+        {
+            get { return Health > 0;  }
+        }
+
+        public int Health { get; private set; } = 100;
+ 
+    }
     class Program
     {
+        
         static ConcurrentDictionary<int, int> items = new ConcurrentDictionary<int, int>();
 
         static void AddItem()
@@ -24,22 +35,32 @@ namespace LearningDotNet
         {
             HttpClient client = new HttpClient(); 
             var data = await client.GetStringAsync("http://google.com");
-            Console.WriteLine("Download complete" + data);
+            await Network.Download(() => Console.WriteLine(data + "Download complete:\n"));
         }
+
+        
 
         // Imaginary external network library
         class Network
         {
-            static public Task Download()
+            static public Task Download(Action callback)
             {
-                return Task.Run(() => Thread.Sleep(3000));
+                return Task.Run(() => {
+                    Thread.Sleep(3000);
+                    callback();
+                    });
             }
         }
+
+
         static void Main(string[] args)
         {
             Console.WriteLine("Downloading file");
             Download();
             Console.ReadLine();
+
+            Player player = new Player();
+            Console.WriteLine(player.IsAlive);
 
             /* hashSet
             var myHash = new HashSet<String>();

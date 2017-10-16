@@ -11,3 +11,11 @@ same time you are free to do other things, such as progect manage.
 - Async and Await to manage program flow
 - Anonymous functioins, callbacks, and action to manage prorgam flow
 
+### Combine Aspects of Fields and Methods with Class Properties
+- Properties
+- Auto-implemented propertie for more compact code
+
+### Optimize Applications with Multithreading
+- creating a new thread
+
+### Set Default values with Null Coalescing and Null Conditional Operators
