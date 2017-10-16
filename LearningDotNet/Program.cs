@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,8 +19,27 @@ namespace LearningDotNet
             items.TryAdd(1, 2);
             Console.WriteLine(items.Count);
         }
+
+        static async void Download()
+        {
+            HttpClient client = new HttpClient(); 
+            var data = await client.GetStringAsync("http://google.com");
+            Console.WriteLine("Download complete" + data);
+        }
+
+        // Imaginary external network library
+        class Network
+        {
+            static public Task Download()
+            {
+                return Task.Run(() => Thread.Sleep(3000));
+            }
+        }
         static void Main(string[] args)
         {
+            Console.WriteLine("Downloading file");
+            Download();
+            Console.ReadLine();
 
             /* hashSet
             var myHash = new HashSet<String>();
