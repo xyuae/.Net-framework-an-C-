@@ -29,7 +29,11 @@ namespace LearningNull
             catch(Exception ex)
             {
                 Console.WriteLine(ex);
-            } 
+            }
+            finally
+            {
+                Console.WriteLine("disconnecting database");
+            }
         }
     }
 }
